@@ -1,14 +1,20 @@
-# Validate.js [![Build Status](https://travis-ci.org/cferdinandi/validate.svg)](https://travis-ci.org/cferdinandi/validate)
+# Validate.js
 A lightweight form validation script that augments native HTML5 form validation elements and attributes, providing a better user experience and giving you more control.
 
-When a visitor leaves a field, Validate.js immediately validates the field and displays an error if applicable. It also validates the entire form on submit, and provides support for custom `onSubmit()` functions (for example, Ajax form submission). You can pass an option to activate live validation on fields while the visitor is still typing.
+When a visitor leaves a field, Validate.js immediately validates the field and displays an error if applicable. It also validates the entire form on submit, and provides support for custom `onSubmit()` functions (for example, Ajax form submission). You can pass an option to activate live validation on fields while the visitor is still typing. It allows for custom errors.
 
-[Download Validate](https://github.com/cferdinandi/validate/archive/master.zip) / [View the demo](http://cferdinandi.github.io/validate/)
+Regarding the original script by Chris Ferdinandi: [Download Validate](https://github.com/cferdinandi/validate/archive/master.zip) / [View the demo](http://cferdinandi.github.io/validate/)
+
+[Download this fork of Validate](https://github.com/michapietsch/validate/archive/master.zip)
+
+This fork builds on v1.1.0 and adds the following features:
+- optional live validation while the visitor is still typing (v1.2.0) &mdash; see below for how to pass options
+- integration for custom errors by providing a wrapper around the HTML5 Constraint API setCustomValidity() function (v.1.3.0) &mdash; see below for an example to use the setCustomError() method
 
 
 <hr>
 
-### Want to learn how to write your own vanilla JS plugins? Get my free [daily developer tips](https://gomakethings.com/newsletter/) and level-up as a web developer. 🚀
+### Want to learn how to write your own vanilla JS plugins? Get Chris Ferdinandi's free [daily developer tips](https://gomakethings.com/newsletter/) and level-up as a web developer. 🚀
 
 <hr>
 
@@ -241,6 +247,29 @@ validate.removeError(
 ```javascript
 var field = document.querySelector('[name="email"]');
 validate.removeError(field);
+```
+
+#### setCustomError()
+Set or remove a custom error. This wraps around the HTML5 Constraint API setCustomValidity() function.
+
+```javascript
+/**
+ * Set or remove a custom error
+ * @public
+ * @param  {Node}   field   	 The field to set the custom error on
+ * @param  {String} errorMessage Custom error message or empty string to remove a custom error
+ */
+validate.setCustomError(
+	field, // The field to set the custom error on
+	errorMessage // Custom error message or empty string to remove a custom error
+);
+```
+
+**Example**
+
+```javascript
+var field = document.querySelector('[name="email"]');
+validate.setCustomError(field, 'This email address is already registered')
 ```
 
 #### destroy()

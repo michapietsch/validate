@@ -207,6 +207,11 @@
 
 		}
 
+		// If a custom error is set
+		if (validity.customError) {
+			return (localSettings.messageCustom && localSettings.messageCustom[field.validationMessage]) || field.validationMessage;
+		}
+
 		// If all else fails, return a generic catchall error
 		return localSettings.messageGeneric;
 
@@ -335,6 +340,17 @@
 	};
 
 	/**
+	 * Set or remove a custom error
+	 * @public
+	 * @param  {Node}   field   	 The field to set the custom error on
+	 * @param  {String} errorMessage Custom error message or empty string
+	 */
+	validate.setCustomError = function (field, errorMessage) {
+		field.setCustomValidity(errorMessage);
+		field.dispatchEvent(new Event('customValiditySet'));
+	};
+
+	/**
 	 * Add the `novalidate` attribute to all forms
 	 * @private
 	 * @param {Boolean} remove  If true, remove the `novalidate` attribute
@@ -460,6 +476,32 @@
 	};
 
 	/**
+	 * Check field validity when a custom error is set or removed
+	 * @private
+	 * @param  {Event} event The customValiditySet event
+	 */
+	var customHandler = function (event) {
+
+		console.log('customHandler');
+
+		// Only run if the field is in a form to be validated
+		if (!event.target.form || !event.target.form.matches(settings.selector)) return;
+
+		// Validate the field
+		var error = validate.hasError(event.target);
+
+		// If there's an error, show it
+		if (error) {
+			validate.showError(event.target, error);
+			return;
+		}
+
+		// Otherwise, remove any errors that exist
+		validate.removeError(event.target);
+
+	};
+
+	/**
 	 * Check all fields on submit
 	 * @private
 	 * @param  {Event} event  The submit event
@@ -557,6 +599,7 @@
 		document.addEventListener('blur', blurHandler, true);
 		document.addEventListener('click', clickHandler, true);
 		document.addEventListener('submit', submitHandler, false);
+		document.addEventListener('customValiditySet', customHandler, true);
 
 		if (settings.useLiveValidation) {
 			document.addEventListener('change', changeHandler, true);
