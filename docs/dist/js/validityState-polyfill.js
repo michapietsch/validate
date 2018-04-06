@@ -1,5 +1,5 @@
 /*!
- * validate v1.2.0: A lightweight form validation script that augments native HTML5 form validation elements and attributes.
+ * validate v1.3.1: A lightweight form validation script that augments native HTML5 form validation elements and attributes.
  * (c) 2018 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/validate
@@ -99,6 +99,11 @@
 
 		// Add valid property to validity object
 		checkValidity.valid = valid;
+
+		// Assume a custom error if there is a validation message present but all the other checks returned valid
+		if (checkValidity.valid && field.validationMessage !== '') {
+			checkValidity.customError = true
+		}
 
 		// Return object
 		return checkValidity;
