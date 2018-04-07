@@ -482,8 +482,6 @@
 	 */
 	var customHandler = function (event) {
 
-		console.log('customHandler');
-
 		// Only run if the field is in a form to be validated
 		if (!event.target.form || !event.target.form.matches(settings.selector)) return;
 
