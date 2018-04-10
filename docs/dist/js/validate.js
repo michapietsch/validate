@@ -1,5 +1,5 @@
 /*!
- * validate v1.3.1: A lightweight form validation script that augments native HTML5 form validation elements and attributes.
+ * validate v1.3.2: A lightweight form validation script that augments native HTML5 form validation elements and attributes.
  * (c) 2018 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/validate
@@ -59,7 +59,7 @@
 		beforeShowError: function () {},
 		afterShowError: function () {},
 		beforeRemoveError: function () {},
-		afterRemoveError: function () {},
+		afterRemoveError: function () {}
 
 	};
 
@@ -166,7 +166,7 @@
 
 		// If field is required and empty
 		if (validity.valueMissing) {
-			
+
 			if (field.type === 'select-multiple') return localSettings.messageValueMissingSelectMulti;
 
 			if (field.type === 'select-one') return localSettings.messageValueMissingSelect;
@@ -558,8 +558,8 @@
 		if ( !settings ) return;
 
 		// Remove event listeners
-		document.removeEventListener('blur', blurHandler, false);
-		document.removeEventListener('click', clickHandler, true);
+		document.removeEventListener('blur', blurHandler, true);
+		document.removeEventListener('click', clickHandler, false);
 		document.removeEventListener('submit', submitHandler, false);
 
 		if (settings.useLiveValidation) {

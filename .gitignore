@@ -1,7 +1,12 @@
 # Node
 node_modules
+package-lock.json
 test/results
 test/coverage
+
+# Compiled
+docs/dist/js/*.min.*.js
+static/js/*.min.*.js
 
 ## OS X
 .DS_Store

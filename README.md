@@ -7,7 +7,7 @@ Regarding the original script by Chris Ferdinandi: [Download Validate](https://g
 
 [Download this fork of Validate](https://github.com/michapietsch/validate/archive/master.zip)
 
-This fork builds on v1.1.0 and adds the following features:
+This fork builds on v1.1.3 and adds the following features:
 - optional live validation while the visitor is still typing (v1.2.0) &mdash; see below for how to pass options
 - integration for custom errors by providing a wrapper around the HTML5 Constraint API setCustomValidity() function (v.1.3.0) &mdash; see below for an example to use the setCustomError() method
 
