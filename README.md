@@ -9,7 +9,7 @@ Regarding the original script by Chris Ferdinandi: [Download Validate](https://g
 
 This fork builds on v1.1.3 and adds the following features:
 - optional live validation while the visitor is still typing (v1.2.0) &mdash; see below for how to pass options
-- delay live validation for invalid values while still typing, but immediately show positive feedback for valid values ("reward early, punish late")
+- delay live validation for invalid values while still typing, but immediately show positive feedback for valid values ("reward early, punish late") (v1.4.0)
 - integration for custom errors by providing a wrapper around the HTML5 Constraint API setCustomValidity() function (v.1.3.0) &mdash; see below for an example to use the setCustomError() method
 
 <hr>
