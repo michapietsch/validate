@@ -24,6 +24,7 @@
 	var validate = {}; // Object for public APIs
 	var supports = 'querySelector' in document && 'addEventListener' in root; // Feature test
 	var settings;
+	var timeout;
 
 	// Default settings
 	var defaults = {
@@ -50,6 +51,8 @@
 
 		// Live Validation
 		useLiveValidation: false,
+		rewardEarlyPunishLate: true,
+		punishLateTimeout: 1000,
 
 		// Form Submission
 		disableSubmit: false,
@@ -432,6 +435,8 @@
 	 */
 	var keyupHandler = function (event) {
 
+		clearTimeout(timeout);
+
 		// Only run if the field is in a form to be validated
 		if (!event.target.form || !event.target.form.matches(settings.selector)) return;
 
@@ -445,7 +450,13 @@
 
 		// If there's an error, show it
 		if (error) {
-			validate.showError(event.target, error);
+			if (settings.rewardEarlyPunishLate === true) {
+				timeout = setTimeout((function () {
+					validate.showError(event.target, error);
+				}), settings.punishLateTimeout);
+			} else {
+				validate.showError(event.target, error);
+			}
 			return;
 		}
 
