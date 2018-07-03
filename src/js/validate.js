@@ -533,6 +533,8 @@
 				if (!hasErrors) {
 					hasErrors = fields[i];
 				}
+			} else {
+				validate.removeError(fields[i]);
 			}
 		}
 
